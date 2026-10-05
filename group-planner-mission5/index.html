@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Group Planner — Mission 5 Frontend</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+<div class="card">
+<h1>Group Planner</h1>
+<p>Plan an affordable outing around the group's availability, location, travel distance, budget, and interests.</p>
+<div class="notice"><strong>Mission 5 frontend build:</strong> This page prepares the customer inputs and results interface. Shared Supabase storage and live AI recommendations are integration points owned separately and are not simulated here.</div>
+</div>
+
+<div class="card">
+<h2>1. Create a Group</h2>
+<label for="group">Group name</label>
+<input id="group" placeholder="Weekend Crew">
+<button type="button" onclick="createGroup()">Create Group</button>
+<div id="created" class="hidden">
+<p>Invite code:</p><div id="code" class="code"></div>
+<p class="small">For this frontend prototype the code is stored in this browser only. Shared multi-device storage must be connected separately.</p>
+</div>
+</div>
+
+<div class="card">
+<h2>2. Add Your Preferences</h2>
+<div class="grid">
+<div><label for="joinCode">Invite code</label><input id="joinCode" placeholder="ABC123"></div>
+<div><label for="name">Your name</label><input id="name" placeholder="Alex"></div>
+<div><label for="budget">Maximum budget per person</label><select id="budget"><option value="">Select budget</option><option value="25">Up to $25</option><option value="50">Up to $50</option><option value="100">Up to $100</option><option value="100+">$100+</option></select></div>
+<div><label for="activity">Interests / activity</label><input id="activity" placeholder="Food, outdoors, museums..."></div>
+<div><label for="startDate">Available from</label><input id="startDate" type="date"></div>
+<div><label for="endDate">Available to</label><input id="endDate" type="date"></div>
+<div class="full"><label for="location">Starting location</label><div class="inline"><input id="location" placeholder="Atlanta, GA or another starting point"><button type="button" class="secondary" onclick="useLocation()">Use Current Location</button></div><p id="locationHelp" class="help">You can type a location if browser location access is unavailable or denied.</p></div>
+<div><label for="distance">Maximum distance willing to travel</label><input id="distance" type="number" min="1" max="500" value="20"></div>
+<div><label for="distanceUnit">Unit</label><select id="distanceUnit"><option value="miles">miles</option><option value="km">kilometers</option></select></div>
+</div>
+<button type="button" onclick="savePrefs()">Save Preferences</button>
+<p id="status" class="status" aria-live="polite"></p>
+</div>
+
+<div class="card">
+<h2>3. Find Places for the Group</h2>
+<p class="small">This results surface is ready for the team's live AI/place-recommendation response. It intentionally does not fabricate AI recommendations.</p>
+<button type="button" onclick="prepareResults()">Prepare Recommendation Request</button>
+<div id="results" class="hidden">
+<div class="result"><strong>Frontend request is ready.</strong><p id="requestSummary"></p><div id="requestTags"></div><p class="help">Next integration: send these structured inputs to the team's AI endpoint, then render returned place name, category, distance, and explanation here.</p></div>
+</div>
+<p id="resultError" class="status error" aria-live="polite"></p>
+</div>
+
+
+  <script src="script.js"></script>
+</body>
+</html>
